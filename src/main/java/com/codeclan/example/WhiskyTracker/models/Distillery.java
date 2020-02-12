@@ -64,5 +64,6 @@ public class Distillery {
     public void setWhiskies(List<Whisky> whiskies) {
         this.whiskies = whiskies;
     }
+
 }
 
