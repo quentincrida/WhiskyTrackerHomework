@@ -3,9 +3,7 @@ package com.codeclan.example.WhiskyTracker;
 import com.codeclan.example.WhiskyTracker.models.Distillery;
 import com.codeclan.example.WhiskyTracker.models.Whisky;
 import com.codeclan.example.WhiskyTracker.repositories.DistilleryRepository.DistilleryRepository;
-import com.codeclan.example.WhiskyTracker.repositories.DistilleryRepository.DistilleryRepositoryCustom;
 import com.codeclan.example.WhiskyTracker.repositories.WhiskyRepository.WhiskyRepository;
-import com.codeclan.example.WhiskyTracker.repositories.WhiskyRepository.WhiskyRepositoryCustom;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +31,6 @@ public class WhiskyTrackerApplicationTests {
 	public void contextLoads() {
 	}
 
-//	@Test
-//	public void canCreateAndSaveAWhiskyObject() {
-//
-//		Distillery distilleryA = new Distillery("Dalwhinnie", "Speyside");
-//		distilleryRepository.save(distilleryA);
-//
-//		Whisky whiskyA = new Whisky("Smokey", 12, 2018, distilleryA);
-//		whiskyRepository.save(whiskyA);
-//	}
 
 	@Test
 	public void canCreateAndSaveADistilleryObject(){
@@ -58,7 +47,18 @@ public class WhiskyTrackerApplicationTests {
 		List<Whisky> found = whiskyRepository.findByYear(2018);
 		assertEquals(2, found.size());
 	}
+
+	@Test
+	public void canGetAllDistilleriesFromRegion(){
+		List<Distillery> found = distilleryRepository.findByRegion("Highland");
+		assertEquals(1, found.size());
 	}
+	@Test
+	public void canGetAllWhiskiesFromDistilleryOfAge() {
+		List<Whisky> foundWhiskies = whiskyRepository.findByAgeAndDistilleryName(12, "Rosebank");
+		assertEquals(1, foundWhiskies.size());
+	}
+}
 
 
 
